@@ -1,0 +1,777 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Psychology: Classical Conditioning Tutorial</title>
+<style>
+:root {
+  --blue:#2457a7;
+  --blue-dark:#183e78;
+  --light:#eef4fc;
+  --green:#198754;
+  --red:#bd3535;
+  --gold:#a66b00;
+  --ink:#202938;
+  --muted:#667085;
+  --border:#d9e0e9;
+  --white:#fff;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:#f3f5f8;
+  color:var(--ink);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.55;
+}
+header {
+  background:linear-gradient(120deg,#183e78,#3274c8);
+  color:white;
+  padding:28px 18px;
+  text-align:center;
+}
+header h1 { margin:0 0 7px; font-size:clamp(24px,5vw,34px); }
+header p { margin:0; opacity:.92; }
+main {
+  width:min(850px,94%);
+  margin:24px auto 50px;
+}
+.panel {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:clamp(18px,4vw,30px);
+  box-shadow:0 3px 12px rgba(20,35,60,.06);
+  margin-bottom:18px;
+}
+h2 { margin-top:0; color:var(--blue-dark); }
+h3 { color:var(--blue-dark); }
+.small { color:var(--muted); font-size:.92rem; }
+.progress-wrap {
+  height:11px;
+  background:#e5e9ef;
+  border-radius:20px;
+  overflow:hidden;
+  margin:12px 0 8px;
+}
+#progressBar {
+  height:100%;
+  width:0%;
+  background:#32865c;
+  transition:width .25s;
+}
+.progress-line {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  color:var(--muted);
+  font-size:.9rem;
+}
+.pill {
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:30px;
+  background:var(--light);
+  color:var(--blue-dark);
+  font-size:.82rem;
+  font-weight:bold;
+}
+.question {
+  font-size:1.12rem;
+  font-weight:bold;
+  margin:18px 0;
+}
+.answers {
+  display:grid;
+  gap:10px;
+}
+.answer {
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:14px 15px;
+  border:2px solid var(--border);
+  background:white;
+  color:var(--ink);
+  border-radius:10px;
+  font-size:1rem;
+  cursor:pointer;
+  line-height:1.4;
+}
+.answer:hover { border-color:var(--blue); background:#f6f9ff; }
+.answer:focus-visible, button:focus-visible {
+  outline:3px solid #f0b429;
+  outline-offset:3px;
+}
+.answer:disabled { cursor:default; opacity:.8; }
+.feedback {
+  border-radius:10px;
+  padding:15px;
+  margin-top:18px;
+  display:none;
+}
+.feedback.correct { display:block; background:#eaf6ef; border-left:5px solid var(--green); }
+.feedback.incorrect { display:block; background:#fff2ed; border-left:5px solid var(--red); }
+.feedback h3 { margin:0 0 7px; font-size:1.05rem; }
+.feedback p { margin:6px 0; }
+button.primary, button.secondary {
+  border:0;
+  border-radius:9px;
+  padding:12px 18px;
+  font-size:1rem;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:15px;
+}
+button.primary { background:var(--blue); color:white; }
+button.primary:hover { background:var(--blue-dark); }
+button.secondary { background:#e8edf4; color:var(--ink); }
+button:disabled { opacity:.5; cursor:not-allowed; }
+.hidden { display:none !important; }
+.option-grid { display:grid; gap:10px; }
+.stat-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:12px;
+  margin:18px 0;
+}
+.stat {
+  background:#f2f6fb;
+  border-radius:10px;
+  padding:15px;
+  text-align:center;
+}
+.stat strong { display:block; font-size:1.6rem; color:var(--blue-dark); }
+.topic-row {
+  border-bottom:1px solid var(--border);
+  padding:12px 0;
+}
+.topic-row:last-child { border-bottom:0; }
+.tag {
+  display:inline-block;
+  font-size:.8rem;
+  border-radius:20px;
+  padding:3px 9px;
+  background:#f0f1f4;
+  margin:3px 3px 3px 0;
+}
+.lesson {
+  background:#f2f6fb;
+  border-radius:10px;
+  padding:14px;
+  margin:12px 0;
+}
+footer { text-align:center; color:var(--muted); padding:15px; font-size:.85rem; }
+@media(max-width:520px) {
+  header { padding:22px 14px; }
+  main { width:96%; margin-top:12px; }
+  .answer { padding:15px 12px; }
+  button.primary,button.secondary { width:100%; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Classical Conditioning</h1>
+  <p>AP Psychology · Interactive Learning Tutorial</p>
+</header>
+
+<main>
+<section id="welcome" class="panel">
+  <h2>Welcome!</h2>
+  <p>This tutorial will help you understand and apply the principles of classical conditioning.</p>
+  <p>You'll work through five sections, each with five questions. If you make a mistake, the tutorial will explain the concept and identify possible misconceptions. It will also give you additional practice when needed.</p>
+  <div class="lesson">
+    <strong>How mastery works</strong>
+    <ul>
+      <li>There are 25 core questions.</li>
+      <li>You can retry questions as many times as needed.</li>
+      <li>Your first attempt on each question contributes to your score.</li>
+      <li>An 80% first-attempt score earns mastery.</li>
+      <li>If you score below 80%, you'll receive targeted review and additional practice.</li>
+    </ul>
+  </div>
+  <p class="small">Your answers stay in this browser session. This tutorial does not send your responses to a teacher or an outside server.</p>
+  <button class="primary" onclick="startTutorial()">Start Tutorial</button>
+</section>
+
+<section id="learning" class="hidden">
+  <div class="panel">
+    <div class="progress-line">
+      <span id="sectionLabel">Section 1 of 5</span>
+      <span id="questionLabel">Question 1 of 25</span>
+    </div>
+    <div class="progress-wrap"><div id="progressBar"></div></div>
+    <div class="progress-line">
+      <span id="progressText">0 of 25 completed</span>
+      <span id="firstScore">First-attempt accuracy: --</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <span class="pill" id="topicLabel">Basic Components</span>
+    <div class="question" id="questionText"></div>
+    <div class="answers" id="answerChoices"></div>
+    <div id="feedback" class="feedback" aria-live="polite"></div>
+    <button id="nextButton" class="primary hidden" onclick="nextQuestion()">Continue</button>
+  </div>
+</section>
+
+<section id="remediation" class="hidden">
+  <div class="panel">
+    <h2>Let's strengthen a few concepts</h2>
+    <p>Your results suggest that a little additional practice could help. The tutorial has selected practice based on the questions you found challenging.</p>
+    <div id="remediationIntro"></div>
+    <div class="question" id="practiceQuestion"></div>
+    <div class="answers" id="practiceChoices"></div>
+    <div id="practiceFeedback" class="feedback" aria-live="polite"></div>
+    <button id="practiceNext" class="primary hidden" onclick="nextPractice()">Next Practice Question</button>
+    <button id="finishPractice" class="primary hidden" onclick="showResults()">View My Results</button>
+  </div>
+</section>
+
+<section id="results" class="hidden">
+  <div class="panel">
+    <h2>Your Learning Report</h2>
+    <p id="resultMessage"></p>
+    <div class="stat-grid">
+      <div class="stat"><strong id="scoreDisplay">--</strong><span>First-attempt score</span></div>
+      <div class="stat"><strong id="correctDisplay">--</strong><span>Core questions correct initially</span></div>
+      <div class="stat"><strong id="retryDisplay">--</strong><span>Questions requiring retries</span></div>
+    </div>
+    <div id="masteryBadge"></div>
+    <h3>Concept-by-concept review</h3>
+    <div id="topicResults"></div>
+    <h3>Misconceptions to review</h3>
+    <div id="misconceptionResults"></div>
+    <p class="small">This report is visible in this browser session. It is not automatically submitted to Canvas or saved to a teacher gradebook.</p>
+    <button class="primary" onclick="location.reload()">Restart Tutorial</button>
+  </div>
+</section>
+</main>
+
+<footer>AP Psychology · Classical Conditioning Learning Practice</footer>
+
+<script>
+const questions = [
+{
+section:"Basic Components", topic:"UCS and UCR", concept:"ucs_ucr",
+q:"A dog naturally begins salivating when food is placed in its mouth. What is the food?",
+a:["Unconditioned stimulus (UCS)","Unconditioned response (UCR)","Conditioned stimulus (CS)","Conditioned response (CR)"],
+correct:0, explanation:"Food naturally produces salivation without prior learning. Therefore, food is the unconditioned stimulus (UCS).",
+wrong:["ucs_ucr","stimulus_response","cs_cr","cs_cr"],
+hint:"Ask yourself: Is this the thing causing the response, or the response itself?"
+},
+{
+section:"Basic Components", topic:"UCS and UCR", concept:"ucs_ucr",
+q:"A person automatically blinks when a puff of air approaches their eye. What is the blinking?",
+a:["UCS","UCR","CS","CR"],
+correct:1, explanation:"The blink is the automatic, unlearned response to the puff of air. It is the unconditioned response (UCR).",
+wrong:["ucs_ucr","ucs_ucr","cs_cr","cs_cr"],
+hint:"A response is an action or reaction. The puff of air is the stimulus; blinking is the response."
+},
+{
+section:"Basic Components", topic:"CS and CR", concept:"cs_cr",
+q:"After repeated pairings with food, a bell causes a dog to salivate. What is the bell?",
+a:["UCS","UCR","CS","CR"],
+correct:2, explanation:"The bell was initially neutral. After being associated with food, it becomes a conditioned stimulus (CS).",
+wrong:["ucs_ucr","stimulus_response","cs_cr","cs_cr"],
+hint:"The bell is something the dog hears. It is a stimulus, not an action."
+},
+{
+section:"Basic Components", topic:"CS and CR", concept:"cs_cr",
+q:"A dog salivates when it hears a bell that has been paired with food. What is the salivation in response to the bell?",
+a:["UCS","UCR","CS","CR"],
+correct:3, explanation:"Salivation in response to the learned bell is the conditioned response (CR).",
+wrong:["ucs_ucr","ucs_ucr","cs_cr","cs_cr"],
+hint:"The learned response is what the dog does after hearing the conditioned stimulus."
+},
+{
+section:"Basic Components", topic:"Stimulus vs. Response", concept:"stimulus_response",
+q:"Which statement correctly distinguishes a stimulus from a response?",
+a:["A stimulus is an action; a response is an event in the environment.","A stimulus is something that produces a reaction; a response is the reaction.","A stimulus and response mean the same thing.","A response must always be learned."],
+correct:1, explanation:"A stimulus is an event or cue that produces a reaction. A response is the reaction itself. Responses can be learned or unlearned.",
+wrong:["stimulus_response","stimulus_response","stimulus_response","stimulus_response"],
+hint:"Think of stimulus as what happens to or around the organism, and response as what the organism does."
+},
+{
+section:"Identifying the Four Components",topic:"Identifying the UCS",concept:"ucs_ucr",
+q:"A student becomes nauseated after eating spoiled food. Later, the smell of that food makes the student nauseated. What was the unconditioned stimulus?",
+a:["The smell of the food","The nausea caused by the smell","The spoiled food that originally caused illness","The student's later avoidance of the food"],
+correct:2, explanation:"The spoiled food naturally caused illness without prior conditioning. It was the unconditioned stimulus.",
+wrong:["cs_cr","ucs_ucr","stimulus_response","cs_cr"],
+hint:"Look for the original event that naturally produced the reaction."
+},
+{
+section:"Identifying the Four Components",topic:"Identifying the UCR",concept:"ucs_ucr",
+q:"A child naturally cries after receiving a painful injection. In this example, what is the unconditioned response?",
+a:["The injection","The doctor's office","Crying in response to the injection","Fear of the doctor's office after repeated visits"],
+correct:2, explanation:"Crying is the automatic response to the painful injection, so it is the UCR.",
+wrong:["stimulus_response","stimulus_response","ucs_ucr","cs_cr"],
+hint:"The UCR is the original automatic reaction, not the event that causes it."
+},
+{
+section:"Identifying the Four Components",topic:"Identifying the CS",concept:"cs_cr",
+q:"After several frightening experiences at the dentist, a child becomes anxious when seeing the dental office. What is the conditioned stimulus?",
+a:["The painful dental treatment","The child's anxiety","The dental office","The child's original pain response"],
+correct:2, explanation:"The dental office becomes associated with unpleasant experiences. It is now a conditioned stimulus that produces anxiety.",
+wrong:["ucs_ucr","cs_cr","cs_cr","ucs_ucr"],
+hint:"The conditioned stimulus is the learned cue that triggers the response."
+},
+{
+section:"Identifying the Four Components",topic:"Identifying the CR",concept:"cs_cr",
+q:"A person feels anxious when hearing a song that was playing during a frightening experience. What is the conditioned response?",
+a:["The song","The frightening experience","The anxiety triggered by the song","The original frightening event"],
+correct:2, explanation:"The anxiety triggered by the song is the learned reaction, or conditioned response.",
+wrong:["cs_cr","ucs_ucr","cs_cr","ucs_ucr"],
+hint:"The CR is the reaction that occurs in response to the learned cue."
+},
+{
+section:"Identifying the Four Components",topic:"Putting It All Together",concept:"four_parts",
+q:"A dog hears a tone immediately before receiving food. After repeated pairings, it salivates when hearing the tone. Which option correctly identifies the CS and CR?",
+a:["Food = CS; salivation to food = CR","Tone = CS; salivation to tone = CR","Tone = UCS; food = UCR","Salivation = CS; tone = CR"],
+correct:1, explanation:"The tone becomes the conditioned stimulus because it predicts food. Salivation to the tone is the conditioned response.",
+wrong:["cs_cr","cs_cr","ucs_ucr","stimulus_response"],
+hint:"Identify the learned cue first, then identify the learned reaction to that cue."
+},
+{
+section:"Acquisition, Extinction, and Recovery",topic:"Acquisition",concept:"acquisition",
+q:"A bell is repeatedly followed by food. Over time, the dog begins salivating to the bell. What is this learning process called?",
+a:["Extinction","Discrimination","Acquisition","Spontaneous recovery"],
+correct:2, explanation:"Acquisition is the initial learning of an association between a neutral stimulus and an unconditioned stimulus.",
+wrong:["extinction","generalization","acquisition","recovery"],
+hint:"Think about the stage when the association is first being learned."
+},
+{
+section:"Acquisition, Extinction, and Recovery",topic:"Extinction",concept:"extinction",
+q:"A dog has learned to salivate to a bell. The bell is then repeatedly presented without food, and salivation gradually decreases. What is happening?",
+a:["Acquisition","Extinction","Spontaneous recovery","Generalization"],
+correct:1, explanation:"Extinction occurs when the conditioned stimulus is repeatedly presented without the UCS, causing the conditioned response to weaken.",
+wrong:["acquisition","extinction","recovery","generalization"],
+hint:"The learned cue is no longer followed by the event it once predicted."
+},
+{
+section:"Acquisition, Extinction, and Recovery",topic:"What Extinction Means",concept:"extinction",
+q:"After a conditioned response disappears through extinction, what is the best explanation of what happened to the original learning?",
+a:["The original association was permanently erased.","The organism forgot everything it had learned.","The response was weakened, but the original learning may still influence behavior.","The UCS became the CS."],
+correct:2, explanation:"Extinction does not necessarily erase the original association. New learning occurs that the CS no longer predicts the UCS.",
+wrong:["extinction","extinction","extinction","ucs_ucr"],
+hint:"Extinction is better understood as new learning rather than simply deleting the original memory."
+},
+{
+section:"Acquisition, Extinction, and Recovery",topic:"Spontaneous Recovery",concept:"recovery",
+q:"A dog stops salivating to a bell after extinction. The next day, the bell is played and the dog briefly salivates again. What is this?",
+a:["Acquisition","Discrimination","Spontaneous recovery","Generalization"],
+correct:2, explanation:"Spontaneous recovery is the reappearance of an extinguished conditioned response after a rest period.",
+wrong:["acquisition","generalization","recovery","generalization"],
+hint:"The response returns after time has passed, even though extinction had occurred."
+},
+{
+section:"Acquisition, Extinction, and Recovery",topic:"Reacquisition",concept:"reacquisition",
+q:"After extinction, a bell is again paired with food. The dog quickly relearns to salivate to the bell. This is called:",
+a:["Reacquisition","Spontaneous recovery","Discrimination","Generalization"],
+correct:0, explanation:"Reacquisition is the quick relearning of a conditioned response after the original association has been weakened through extinction.",
+wrong:["reacquisition","recovery","generalization","generalization"],
+hint:"The dog is learning the association again through new pairings."
+},
+{
+section:"Generalization and Discrimination",topic:"Generalization",concept:"generalization",
+q:"A child is frightened by one large barking dog. Later, the child becomes frightened when seeing other large dogs. This illustrates:",
+a:["Extinction","Stimulus discrimination","Stimulus generalization","Spontaneous recovery"],
+correct:2, explanation:"Stimulus generalization occurs when stimuli similar to the original conditioned stimulus trigger a similar response.",
+wrong:["extinction","generalization","generalization","recovery"],
+hint:"The response spreads to other stimuli that resemble the original cue."
+},
+{
+section:"Generalization and Discrimination",topic:"Discrimination",concept:"discrimination",
+q:"A dog learns to salivate only to a particular tone and not to other similar tones. This illustrates:",
+a:["Stimulus generalization","Stimulus discrimination","Extinction","Acquisition"],
+correct:1, explanation:"Stimulus discrimination is learning to respond differently to distinct stimuli rather than responding to all similar cues.",
+wrong:["generalization","discrimination","extinction","acquisition"],
+hint:"The dog is learning to tell the cues apart."
+},
+{
+section:"Generalization and Discrimination",topic:"Comparing Generalization and Discrimination",concept:"generalization",
+q:"Which example best illustrates stimulus generalization?",
+a:["A student becomes nervous only when hearing one specific alarm.","A person who was frightened by a snake becomes nervous around similar-looking snakes.","A dog stops responding to a bell after extinction.","A child learns that one teacher's voice predicts a reward."],
+correct:1, explanation:"The fear response extends from the original snake to similar snakes. That is generalization.",
+wrong:["discrimination","generalization","extinction","acquisition"],
+hint:"Look for a response spreading to similar but different stimuli."
+},
+{
+section:"Generalization and Discrimination",topic:"Comparing Generalization and Discrimination",concept:"generalization",
+q:"A person who was bitten by a German shepherd becomes afraid of all dogs, regardless of breed. This is an example of:",
+a:["Stimulus generalization","Stimulus discrimination","Spontaneous recovery","Extinction"],
+correct:0, explanation:"The fear response spreads from one type of dog to many other dogs. That is stimulus generalization.",
+wrong:["generalization","discrimination","recovery","extinction"],
+hint:"Is the person responding to more stimuli or learning to distinguish between them?"
+},
+{
+section:"Generalization and Discrimination",topic:"Applying Discrimination",concept:"discrimination",
+q:"A child initially fears all dogs after being bitten. Through experience, the child learns that a neighbor's gentle dog is safe and no longer fears that dog. This illustrates:",
+a:["Generalization","Discrimination","Acquisition","Spontaneous recovery"],
+correct:1, explanation:"The child learns to distinguish between the original frightening stimulus and a different, safe stimulus.",
+wrong:["generalization","discrimination","acquisition","recovery"],
+hint:"The child is learning that not all similar-looking stimuli predict the same outcome."
+},
+{
+section:"AP-Style Application",topic:"Identifying Conditioning in Everyday Life",concept:"four_parts",
+q:"A student repeatedly feels sick after eating lunch in a particular cafeteria. Eventually, entering the cafeteria makes the student feel nauseated. Which is the CS?",
+a:["The original illness","The nausea caused by illness","The cafeteria","The nausea caused by entering the cafeteria"],
+correct:2, explanation:"The cafeteria becomes associated with the original illness. It is now the conditioned stimulus.",
+wrong:["ucs_ucr","ucs_ucr","cs_cr","cs_cr"],
+hint:"The CS is the learned environmental cue, not the original cause or the response."
+},
+{
+section:"AP-Style Application",topic:"Acquisition in a Real-World Scenario",concept:"acquisition",
+q:"A researcher repeatedly pairs a neutral light with a loud noise. Eventually, participants show a startle response when the light appears alone. Which statement best describes acquisition?",
+a:["The startle response gradually becomes associated with the light.","The startle response disappears permanently.","Participants learn to respond to all lights.","The original loud noise becomes neutral."],
+correct:0, explanation:"During acquisition, the neutral light becomes associated with the loud noise and eventually triggers a learned response.",
+wrong:["acquisition","extinction","generalization","ucs_ucr"],
+hint:"Acquisition is the development of the association between the previously neutral cue and the UCS."
+},
+{
+section:"AP-Style Application",topic:"Extinction in a Real-World Scenario",concept:"extinction",
+q:"A tone has been conditioned to produce anxiety. A person repeatedly hears the tone in safe situations without an unpleasant event occurring. Eventually, anxiety decreases. This is:",
+a:["Spontaneous recovery","Extinction","Generalization","Discrimination"],
+correct:1, explanation:"Repeatedly experiencing the conditioned stimulus without the expected UCS weakens the conditioned response. This is extinction.",
+wrong:["recovery","extinction","generalization","discrimination"],
+hint:"The cue is no longer followed by the event that originally produced the response."
+},
+{
+section:"AP-Style Application",topic:"Recovery and Relearning",concept:"recovery",
+q:"A person has stopped feeling anxious when hearing a particular sound after extinction. Several weeks later, a brief anxiety response returns when the sound is heard. Which concept best explains this?",
+a:["Acquisition","Stimulus discrimination","Spontaneous recovery","Stimulus generalization"],
+correct:2, explanation:"The conditioned response returns after a period of time following extinction. This is spontaneous recovery.",
+wrong:["acquisition","discrimination","recovery","generalization"],
+hint:"Pay attention to the time interval after extinction."
+},
+{
+section:"AP-Style Application",topic:"Applying Generalization and Discrimination",concept:"generalization",
+q:"After being frightened by a loud barking dog, a student becomes nervous around dogs that bark, even when they are unfamiliar. Which concept is most clearly demonstrated?",
+a:["Extinction","Stimulus generalization","Spontaneous recovery","Reacquisition"],
+correct:1, explanation:"The response has spread to similar cues: other barking dogs. This is stimulus generalization.",
+wrong:["extinction","generalization","recovery","reacquisition"],
+hint:"The student is responding to stimuli that resemble the original frightening experience."
+}
+];
+
+const misconceptions = {
+  ucs_ucr:{
+    title:"UCS vs. UCR confusion",
+    lesson:"The UCS is the naturally occurring stimulus that triggers a reaction. The UCR is the automatic, unlearned reaction itself. For example, food is the UCS and salivation to food is the UCR.",
+    practice:[
+      {q:"A person automatically sneezes when pepper enters their nose. What is the pepper?",a:["UCS","UCR","CS","CR"],correct:0,why:"Pepper is the stimulus that naturally triggers sneezing. It is the UCS."},
+      {q:"A person automatically sneezes when pepper enters their nose. What is the sneezing?",a:["UCS","UCR","CS","CR"],correct:1,why:"Sneezing is the automatic reaction. It is the UCR."}
+    ]
+  },
+  cs_cr:{
+    title:"CS vs. CR confusion",
+    lesson:"The CS is the previously neutral cue that becomes associated with the UCS. The CR is the learned response to that cue. The CS is what the organism notices; the CR is what the organism does.",
+    practice:[
+      {q:"A song repeatedly plays before an unpleasant event. Eventually, the song produces anxiety. What is the song?",a:["CS","CR","UCS","UCR"],correct:0,why:"The song is the learned cue, so it is the conditioned stimulus."},
+      {q:"The same song now produces anxiety. What is the anxiety?",a:["CS","CR","UCS","UCR"],correct:1,why:"Anxiety is the learned response, so it is the conditioned response."}
+    ]
+  },
+  stimulus_response:{
+    title:"Stimulus vs. response confusion",
+    lesson:"A stimulus is an event or cue that produces a reaction. A response is the organism's reaction. A sound is a stimulus; turning your head toward it is a response.",
+    practice:[
+      {q:"A phone rings and a person turns toward it. What is the ringing?",a:["Stimulus","Response"],correct:0,why:"The ringing is the event that triggers a reaction, so it is the stimulus."},
+      {q:"A phone rings and a person turns toward it. What is turning toward the phone?",a:["Stimulus","Response"],correct:1,why:"Turning toward the phone is the person's reaction, so it is the response."}
+    ]
+  },
+  four_parts:{
+    title:"Identifying all four components",
+    lesson:"Start with the original, unlearned relationship: UCS produces UCR. Then identify what was learned: CS produces CR. Separate the original natural reaction from the learned reaction.",
+    practice:[
+      {q:"Food naturally makes a dog salivate. A bell is later paired with food. What naturally produces salivation?",a:["Bell","Food","Salivation to bell","Conditioned response"],correct:1,why:"Food naturally produces salivation, making it the UCS."},
+      {q:"After learning, the bell makes the dog salivate. What is the salivation to the bell?",a:["UCS","UCR","CS","CR"],correct:3,why:"Salivation to the learned bell is the conditioned response."}
+    ]
+  },
+  acquisition:{
+    title:"Acquisition confusion",
+    lesson:"Acquisition is the initial learning of an association. A neutral stimulus is repeatedly paired with a UCS until it begins to produce a conditioned response.",
+    practice:[
+      {q:"A light is repeatedly paired with food. A dog eventually salivates to the light. Which process occurred?",a:["Acquisition","Extinction","Recovery"],correct:0,why:"The dog learned a new association between the light and food. That is acquisition."}
+    ]
+  },
+  extinction:{
+    title:"Extinction confusion",
+    lesson:"Extinction occurs when the CS is repeatedly presented without the UCS. The conditioned response weakens. This does not necessarily erase the original association; new learning occurs that the CS no longer predicts the UCS.",
+    practice:[
+      {q:"A bell no longer produces salivation after being played repeatedly without food. What occurred?",a:["Acquisition","Extinction","Generalization"],correct:1,why:"The bell was presented without food and the conditioned response weakened. That is extinction."},
+      {q:"Does extinction necessarily erase the original association?",a:["Yes, permanently","No, the original learning may remain"],correct:1,why:"Extinction involves new learning, not necessarily erasure of the original association."}
+    ]
+  },
+  recovery:{
+    title:"Spontaneous recovery confusion",
+    lesson:"Spontaneous recovery is the return of an extinguished conditioned response after a rest period. Reacquisition is the rapid relearning of the response after the CS and UCS are paired again.",
+    practice:[
+      {q:"After extinction, a response returns following a rest period, without new pairings. What is this?",a:["Spontaneous recovery","Reacquisition"],correct:0,why:"The response returned after time passed, without new pairings. This is spontaneous recovery."},
+      {q:"After extinction, a response is quickly relearned when the CS is again paired with the UCS. What is this?",a:["Spontaneous recovery","Reacquisition"],correct:1,why:"The organism is learning the association again. This is reacquisition."}
+    ]
+  },
+  reacquisition:{
+    title:"Reacquisition confusion",
+    lesson:"Reacquisition is the quick relearning of an association after extinction. It involves new pairings of the CS and UCS. Spontaneous recovery is the return of a response after time passes, without new pairings.",
+    practice:[
+      {q:"A dog quickly relearns to salivate to a bell after the bell is again paired with food. What is this?",a:["Reacquisition","Spontaneous recovery"],correct:0,why:"The new pairings allow the dog to relearn the association. This is reacquisition."}
+    ]
+  },
+  generalization:{
+    title:"Generalization vs. discrimination",
+    lesson:"Generalization means responding to stimuli similar to the original conditioned stimulus. Discrimination means learning to distinguish between stimuli and respond differently to them.",
+    practice:[
+      {q:"A child frightened by one dog becomes afraid of many similar dogs. What is this?",a:["Generalization","Discrimination"],correct:0,why:"The fear response spreads to similar stimuli. This is generalization."},
+      {q:"A child learns that one particular dog is safe and responds differently to it. What is this?",a:["Generalization","Discrimination"],correct:1,why:"The child learns to distinguish between stimuli. This is discrimination."}
+    ]
+  },
+  discrimination:{
+    title:"Discrimination vs. generalization",
+    lesson:"Discrimination means learning to respond differently to distinct stimuli. Generalization means a response spreads to similar stimuli.",
+    practice:[
+      {q:"A dog responds to one particular tone but not to other similar tones. What is this?",a:["Generalization","Discrimination"],correct:1,why:"The dog has learned to tell the tones apart. This is discrimination."},
+      {q:"A fear response spreads from one dog to many similar dogs. What is this?",a:["Generalization","Discrimination"],correct:0,why:"The response spreads to similar cues. This is generalization."}
+    ]
+  }
+};
+
+let current = 0;
+let firstCorrect = [];
+let attempts = [];
+let errors = {};
+let practiceQueue = [];
+let practiceIndex = 0;
+let practiceCorrect = 0;
+let activePractice = null;
+let firstPracticeAnswered = false;
+
+function show(id) {
+  ["welcome","learning","remediation","results"].forEach(x =>
+    document.getElementById(x).classList.toggle("hidden",x!==id)
+  );
+}
+
+function startTutorial() {
+  show("learning");
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[current];
+  document.getElementById("sectionLabel").textContent =
+    "Section " + (Math.floor(current/5)+1) + " of 5 · " + q.section;
+  document.getElementById("questionLabel").textContent =
+    "Question " + (current+1) + " of 25";
+  document.getElementById("topicLabel").textContent = q.topic;
+  document.getElementById("questionText").textContent = q.q;
+  document.getElementById("progressBar").style.width = (current/25*100)+"%";
+  document.getElementById("progressText").textContent =
+    current + " of 25 completed";
+  const done = firstCorrect.filter(Boolean).length;
+  document.getElementById("firstScore").textContent =
+    "First-attempt accuracy: " + (current ? Math.round(done/current*100)+"%" : "--");
+  const choices = document.getElementById("answerChoices");
+  choices.innerHTML="";
+  q.a.forEach((answer,i)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.textContent=String.fromCharCode(65+i)+". "+answer;
+    b.onclick=()=>answerCore(i);
+    choices.appendChild(b);
+  });
+  const fb=document.getElementById("feedback");
+  fb.className="feedback";
+  fb.innerHTML="";
+  document.getElementById("nextButton").classList.add("hidden");
+}
+
+function answerCore(choice) {
+  const q=questions[current];
+  const choices=[...document.querySelectorAll("#answerChoices button")];
+  const fb=document.getElementById("feedback");
+  attempts[current]=(attempts[current]||0)+1;
+  if(choice===q.correct) {
+    if(firstCorrect[current]===undefined) firstCorrect[current]=attempts[current]===1;
+    choices.forEach(b=>b.disabled=true);
+    fb.className="feedback correct";
+    fb.innerHTML="<h3>Correct!</h3><p>"+q.explanation+"</p>";
+    document.getElementById("nextButton").classList.remove("hidden");
+    document.getElementById("nextButton").textContent =
+      current===24 ? "Finish Core Questions" : "Continue";
+  } else {
+    if(firstCorrect[current]===undefined) firstCorrect[current]=false;
+    const key=q.wrong[choice]||q.concept;
+    errors[key]=(errors[key]||0)+1;
+    fb.className="feedback incorrect";
+    fb.innerHTML="<h3>Not quite. Let's work through this.</h3><p>"+q.hint+"</p><p><strong>Think about it:</strong> "+q.explanation+"</p><p>Try another answer. You can retry as many times as you need.</p>";
+    choices[choice].disabled=true;
+  }
+  const done=firstCorrect.filter(x=>x!==undefined).length;
+  document.getElementById("progressText").textContent=done+" of 25 answered correctly";
+  const score=firstCorrect.filter(Boolean).length;
+  document.getElementById("firstScore").textContent =
+    "First-attempt accuracy: "+Math.round(score/Math.max(1,done)*100)+"%";
+}
+
+function nextQuestion() {
+  current++;
+  if(current<questions.length) renderQuestion();
+  else beginRemediation();
+}
+
+function beginRemediation() {
+  const score=firstCorrect.filter(Boolean).length;
+  const missedConcepts={};
+  firstCorrect.forEach((correct,i)=>{
+    if(correct===false) {
+      const q=questions[i];
+      const key=errors[q.concept] ? q.concept :
+        (Object.keys(errors).find(k=>q.wrong.includes(k))||q.concept);
+      missedConcepts[key]=(missedConcepts[key]||0)+1;
+    }
+  });
+  // Use the diagnosed misconception tags recorded from wrong choices.
+  const keys=Object.keys(errors).filter(k=>misconceptions[k]);
+  practiceQueue=[];
+  keys.forEach(key=>{
+    const bank=misconceptions[key];
+    bank.practice.forEach(p=>{
+      practiceQueue.push({...p,key:key,title:bank.title,lesson:bank.lesson});
+    });
+  });
+  // If a student missed a question but selected an undiagnosed distractor,
+  // still provide practice for the question's main concept.
+  firstCorrect.forEach((correct,i)=>{
+    if(correct===false) {
+      const q=questions[i];
+      if(misconceptions[q.concept] &&
+         !practiceQueue.some(p=>p.key===q.concept)) {
+        misconceptions[q.concept].practice.forEach(p=>
+          practiceQueue.push({...p,key:q.concept,
+            title:misconceptions[q.concept].title,
+            lesson:misconceptions[q.concept].lesson})
+        );
+      }
+    }
+  });
+  // Keep the remediation manageable and varied.
+  practiceQueue=practiceQueue.slice(0,12);
+  if(score===25 || practiceQueue.length===0) {
+    showResults();
+    return;
+  }
+  practiceIndex=0;
+  practiceCorrect=0;
+  document.getElementById("remediationIntro").innerHTML =
+    "<div class='lesson'><strong>Your first-attempt score: "+score+"/25 ("+
+    Math.round(score/25*100)+"%)</strong><p>"+
+    (score>=20 ? "You have achieved the 80% mastery goal. These extra questions are optional reinforcement." :
+    "You haven't reached 80% yet. These short exercises will help strengthen the concepts you found challenging.")+
+    "</p></div><p>We've identified "+keys.length+
+    " possible misconception area(s). Let's practice.</p>";
+  show("remediation");
+  renderPractice();
+}
+
+function renderPractice() {
+  if(practiceIndex>=practiceQueue.length) {
+    document.getElementById("practiceQuestion").textContent="Practice complete!";
+    document.getElementById("practiceChoices").innerHTML="";
+    document.getElementById("practiceFeedback").className="feedback correct";
+    document.getElementById("practiceFeedback").innerHTML=
+      "<h3>Nice work!</h3><p>You completed your targeted practice.</p>";
+    document.getElementById("practiceNext").classList.add("hidden");
+    document.getElementById("finishPractice").classList.remove("hidden");
+    return;
+  }
+  const p=practiceQueue[practiceIndex];
+  activePractice=p;
+  firstPracticeAnswered=false;
+  document.getElementById("remediationIntro").innerHTML=
+    "<div class='lesson'><strong>Focus: "+p.title+"</strong><p>"+p.lesson+"</p></div><p>Practice "+(practiceIndex+1)+" of "+practiceQueue.length+"</p>";
+  document.getElementById("practiceQuestion").textContent=p.q;
+  const choices=document.getElementById("practiceChoices");
+  choices.innerHTML="";
+  p.a.forEach((a,i)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.textContent=String.fromCharCode(65+i)+". "+a;
+    b.onclick=()=>answerPractice(i);
+    choices.appendChild(b);
+  });
+  const fb=document.getElementById("practiceFeedback");
+  fb.className="feedback";
+  fb.innerHTML="";
+  document.getElementById("practiceNext").classList.add("hidden");
+  document.getElementById("finishPractice").classList.add("hidden");
+}
+
+function answerPractice(choice) {
+  const p=activePractice;
+  const buttons=[...document.querySelectorAll("#practiceChoices button")];
+  const fb=document.getElementById("practiceFeedback");
+  if(choice===p.correct) {
+    practiceCorrect++;
+    buttons.forEach(b=>b.disabled=true);
+    fb.className="feedback correct";
+    fb.innerHTML="<h3>Correct!</h3><p>"+p.why+"</p>";
+    document.getElementById("practiceNext").classList.remove("hidden");
+    document.getElementById("practiceNext").textContent =
+      practiceIndex===practiceQueue.length-1 ? "Finish Practice" : "Next Practice Question";
+  } else {
+    buttons[choice].disabled=true;
+    fb.className="feedback incorrect";
+    fb.innerHTML="<h3>Try again.</h3><p>"+p.why+"</p><p>Review the explanation above and select another answer.</p>";
+  }
+}
+
+function nextPractice() {
+  practiceIndex++;
+  renderPractice();
+}
+
+function showResults() {
+  show("results");
+  const score=firstCorrect.filter(Boolean).length;
+  const pct=Math.round(score/25*100);
+  const retries=attempts.filter(n=>n>1).length;
+  document.getElementById("scoreDisplay").textContent=pct+"%";
+  document.getElementById("correctDisplay").textContent=score+"/25";
+  document.getElementById("retryDisplay").textContent=retries;
+  document.getElementById("resultMessage").textContent=
+    pct>=80
+    ? "Congratulations! You reached the 80% mastery goal on your first attempts."
+    : "You completed the tutorial. Your targeted practice has helped you review the concepts you found challenging. Revisit the topics below to continue strengthening your understanding.";
+  document.getElementById("masteryBadge").innerHTML=
+    pct>=80
+    ? "<span class='pill' style='background:#e5f5eb;color:#17683c'>80% mastery achieved</span>"
+    : "<span class='pill' style='background:#fff2df;color:#895900'>More review recommended · Mastery not yet achieved</span>";
+  const topics=[
+    "Basic Components",
+    "Identifying the Four Components",
+    "Acquisition, Extinction, and Recovery",
+    "Generalization and Discrimination",
+    "AP-Style Application"
+  ];
+  document.getElementById("topicResults").innerHTML=topics.map(topic=>{
+    const indexes=questions.map((q,i)=>q.section===topic?i:-1).filter(i=>i>=0);
+    const correct=indexes.filter(i=>firstCorrect[i]).length;
+    const percent=Math.round(correct/indexes.length*100);
+    return "<div class='topic-row'><strong>"+topic+"</strong><br>"+
+      correct+" of "+indexes.length+" first attempts correct ("+percent+"%)</div>";
+  }).join("");
+  const detected=Object.keys(errors).filter(k=>misconceptions[k]);
+  document.getElementById("misconceptionResults").innerHTML=
+    detected.length
+    ? detected.map(k=>"<div class='topic-row'><strong>"+misconceptions[k].title+
+      "</strong><p class='small'>"+misconceptions[k].lesson+"</p></div>").join("")
+    : "<p>No recurring misconception patterns were detected. Great work!</p>";
+  document.getElementById("progressBar").style.width="100%";
+}
+</script>
+</body>
+</html>
